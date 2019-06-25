@@ -1,4 +1,5 @@
 ﻿using Panacea.Modularity.AudioManager;
+using Panacea.Modularity.UiManager;
 using Panacea.Modules.AudioManager.Views;
 using Panacea.Mvvm;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 namespace Panacea.Modules.AudioManager.ViewModels
 {
     [View(typeof(SettingsControl))]
-    class SettingsControlViewModel:ViewModelBase
+    class SettingsControlViewModel: SettingsControlViewModelBase
     {
         public SettingsControlViewModel(IAudioManager manager)
         {
