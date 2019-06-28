@@ -2,6 +2,7 @@
 using Panacea.Modularity.AudioManager;
 using Panacea.Modularity.UiManager;
 using Panacea.Modules.AudioManager.ViewModels;
+using Panacea.Modules.AudioManager.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,8 @@ namespace Panacea.Modules.AudioManager
         protected int defaultSpeakersVolume = 100;
         protected int defaultMicrophoneVolume = 100;
         protected string mainAudioDevice = null;
-        NavigationControlviewModel _navButton;
-
+        NavigationControlViewModel _navButton;
+        VolumeBar _volumeBar;
         public AudioManagerPlugin(PanaceaServices core)
         {
             _core = core;
@@ -40,9 +41,10 @@ namespace Panacea.Modules.AudioManager
             if(_core.TryGetUiManager(out IUiManager ui))
             {
                 //ui.AddSettingsControl(new SettingsControlViewModel(GetAudioManager()));
-                _navButton = new NavigationControlviewModel();
+                _navButton = new NavigationControlViewModel(GetAudioManager());
                 ui.AddNavigationBarControl(_navButton);
             }
+            _volumeBar = new VolumeBar(GetAudioManager());
             return Task.CompletedTask;
         }
 

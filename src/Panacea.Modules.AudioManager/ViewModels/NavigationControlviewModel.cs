@@ -1,4 +1,5 @@
 ﻿using Panacea.Controls;
+using Panacea.Modularity.AudioManager;
 using Panacea.Modules.AudioManager.Views;
 using Panacea.Mvvm;
 using System;
@@ -13,8 +14,10 @@ using System.Windows.Input;
 namespace Panacea.Modules.AudioManager.ViewModels
 {
     [View(typeof(NavigationControl))]
-    class NavigationControlviewModel : ViewModelBase
+    class NavigationControlViewModel : ViewModelBase
     {
+        public IAudioManager Manager { get; }
+        bool _popOpenState;
         bool _popOpen;
         public bool PopupOpen
         {
@@ -25,21 +28,49 @@ namespace Panacea.Modules.AudioManager.ViewModels
                 OnPropertyChanged();
             }
         }
-        public NavigationControlviewModel()
+        public NavigationControlViewModel(IAudioManager manager)
         {
+            manager.SpeakersVolume = 84;
+            Manager = manager;
             ClickCommand = new RelayCommand(args =>
             {
                 PopupOpen = !PopupOpen;
+            },
+            args => !PopupOpen);
+            VolumeDownCommand = new RelayCommand(args =>
+            {
+
+                manager.SpeakersVolume = RoundBy5Down(manager.SpeakersVolume) - 5;
+            });
+
+            VolumeUpCommand = new RelayCommand(args =>
+            {
+                manager.SpeakersVolume = RoundBy5Up(manager.SpeakersVolume) + 5;
             });
         }
+
+        int RoundBy5Down(int v)
+        {
+            return (int)(v / 10 * 10.0 + Math.Ceiling(v % 10 / 5.0) * 5);
+        }
+
+        int RoundBy5Up(int v)
+        {
+            return (int)(v / 10 * 10.0 + Math.Floor(v % 10 / 5.0) * 5);
+        }
+
         public ICommand ClickCommand { get; }
+
+        public ICommand VolumeDownCommand { get; }
+
+        public ICommand VolumeUpCommand { get; }
     }
 
     public class HeightConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (double)value * 3;
+            return (double)value * 3.5;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -52,7 +83,7 @@ namespace Panacea.Modules.AudioManager.ViewModels
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return (double)value * 2;
+            return (double)value * 1.8;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

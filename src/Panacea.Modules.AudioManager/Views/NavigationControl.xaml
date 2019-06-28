@@ -25,31 +25,40 @@
         Text="Volume"
         TextVisibility="Visible">
         <Popup
+            Name="popup"
             Width="{Binding ElementName=VolumeButton, Path=ActualWidth, Converter={StaticResource HeightConverter2}}"
-            Height="{Binding ElementName=VolumeButton, Path=ActualHeight, Converter={StaticResource HeightConverter}}"
             IsOpen="{Binding PopupOpen}"
             Placement="Custom"
-            StaysOpen="True"
-            Name="popup">
+            StaysOpen="False">
 
-
-            <UniformGrid Columns="1">
-                <controls:ImageButton
-                    controls:Material.Icon="volume_up"
-                    Command="{Binding VolumeUpCommand}"
+            <StackPanel>
+                <TextBlock
+                    Padding="5"
+                    FontSize="{DynamicResource FontSize-Xx-Large}"
                     Foreground="White"
-                    Text="{multilinguality:Translate 'Vol up',
-                                                     'AudioManager'}"
-                    TextVisibility="Visible" />
-                <controls:ImageButton
-                    Padding="10"
-                    controls:Material.Icon="volume_down"
-                    Command="{Binding VolumeDownCommand}"
-                    Foreground="White"
-                    Text="{multilinguality:Translate 'Vol dn',
-                                                     'AudioManager'}" />
-            </UniformGrid>
-
+                    TextAlignment="Center">
+                    <TextBlock.Inlines>
+                        <Run Text="{Binding Manager.SpeakersVolume}" />
+                        <Run FontSize="{DynamicResource FontSize-Normal}" Text="%" />
+                    </TextBlock.Inlines>
+                </TextBlock>
+                <UniformGrid Columns="1">
+                    <controls:ImageButton
+                        controls:Material.Icon="volume_up"
+                        Command="{Binding VolumeUpCommand}"
+                        Foreground="White"
+                        Text="{multilinguality:Translate 'Vol up',
+                                                         'AudioManager'}"
+                        TextVisibility="Visible" />
+                    <controls:ImageButton
+                        Padding="10"
+                        controls:Material.Icon="volume_down"
+                        Command="{Binding VolumeDownCommand}"
+                        Foreground="White"
+                        Text="{multilinguality:Translate 'Vol dn',
+                                                         'AudioManager'}" />
+                </UniformGrid>
+            </StackPanel>
         </Popup>
     </controls:ImageButton>
 </UserControl>
