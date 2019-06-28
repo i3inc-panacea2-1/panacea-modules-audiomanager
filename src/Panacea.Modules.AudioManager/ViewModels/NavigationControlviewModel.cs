@@ -17,7 +17,6 @@ namespace Panacea.Modules.AudioManager.ViewModels
     class NavigationControlViewModel : ViewModelBase
     {
         public IAudioManager Manager { get; }
-        bool _popOpenState;
         bool _popOpen;
         public bool PopupOpen
         {
@@ -41,12 +40,14 @@ namespace Panacea.Modules.AudioManager.ViewModels
             {
 
                 manager.SpeakersVolume = RoundBy5Down(manager.SpeakersVolume) - 5;
-            });
+            },
+            args => manager.SpeakersVolume > 0);
 
             VolumeUpCommand = new RelayCommand(args =>
             {
                 manager.SpeakersVolume = RoundBy5Up(manager.SpeakersVolume) + 5;
-            });
+            },
+            args => manager.SpeakersVolume < 100);
         }
 
         int RoundBy5Down(int v)

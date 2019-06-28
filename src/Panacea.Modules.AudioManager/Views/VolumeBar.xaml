@@ -44,6 +44,7 @@
                 </Grid.ColumnDefinitions>
 
                 <pcontrols:MaterialIcon
+                    Margin="5"
                     HorizontalAlignment="Center"
                     Foreground="White"
                     Icon="volume_up" />

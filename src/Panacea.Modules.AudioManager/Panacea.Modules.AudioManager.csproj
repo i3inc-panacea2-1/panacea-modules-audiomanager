@@ -102,7 +102,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="ViewModels\NavigationControlviewModel.cs" />
+    <Compile Include="ViewModels\NavigationControlViewModel.cs" />
     <Compile Include="ViewModels\SettingsControlViewModel.cs" />
     <Compile Include="Views\NavigationControl.xaml.cs">
       <DependentUpon>NavigationControl.xaml</DependentUpon>
