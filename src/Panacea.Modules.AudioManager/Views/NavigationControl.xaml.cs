@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -23,6 +24,23 @@ namespace Panacea.Modules.AudioManager.Views
         public NavigationControl()
         {
             InitializeComponent();
+            popup.CustomPopupPlacementCallback = new CustomPopupPlacementCallback(PlacePopup);
+        }
+
+        public CustomPopupPlacement[] PlacePopup(Size popupSize,
+                                           Size targetSize,
+                                           Point offset)
+        {
+            var p = VolumeButton.PointToScreen(new Point(0, 0));
+            var placement1 =
+               new CustomPopupPlacement(new Point(p.X + VolumeButton.ActualWidth / 2 - popupSize.Width / 2, p.Y - popupSize.Height), PopupPrimaryAxis.Vertical);
+
+            var placement2 =
+                new CustomPopupPlacement(new Point(10, 20), PopupPrimaryAxis.Horizontal);
+
+            var ttplaces =
+                    new CustomPopupPlacement[] { placement1 };
+            return ttplaces;
         }
     }
 }
