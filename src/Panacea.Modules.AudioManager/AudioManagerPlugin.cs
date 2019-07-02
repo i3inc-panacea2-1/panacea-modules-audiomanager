@@ -16,7 +16,10 @@ namespace Panacea.Modules.AudioManager
         private readonly PanaceaServices _core;
         AudioManagerImpl _manager;
 
-        protected int defaultSpeakersVolume = 100;
+        [PanaceaInject("DefaultSpeakersVolume", "Sets the default percentage for speakers", "DefaultSpeakersVolume=50")]
+        protected int DefaultSpeakersVolume { get; set; } = 100;
+
+
         protected int defaultMicrophoneVolume = 100;
         protected string mainAudioDevice = null;
         NavigationControlViewModel _navButton;
@@ -50,7 +53,7 @@ namespace Panacea.Modules.AudioManager
 
         public IAudioManager GetAudioManager()
         {
-            return _manager ?? (_manager = new AudioManagerImpl(_core.Logger, mainAudioDevice, defaultSpeakersVolume, defaultMicrophoneVolume));
+            return _manager ?? (_manager = new AudioManagerImpl(_core.Logger, mainAudioDevice, DefaultSpeakersVolume, defaultMicrophoneVolume));
         }
 
         public Task Shutdown()

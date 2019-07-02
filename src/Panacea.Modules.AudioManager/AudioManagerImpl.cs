@@ -4,6 +4,7 @@ using Panacea.Modularity.AudioManager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -18,6 +19,7 @@ namespace Panacea.Modules.AudioManager
         {
             _mainAudioOut = mainAudioOut;
             _logger = logger;
+            if (Debugger.IsAttached) return;
             try
             {
                 var enumerator = new MMDeviceEnumerator();

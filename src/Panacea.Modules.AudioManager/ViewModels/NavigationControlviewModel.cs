@@ -29,7 +29,6 @@ namespace Panacea.Modules.AudioManager.ViewModels
         }
         public NavigationControlViewModel(IAudioManager manager)
         {
-            manager.SpeakersVolume = 84;
             Manager = manager;
             ClickCommand = new RelayCommand(args =>
             {
