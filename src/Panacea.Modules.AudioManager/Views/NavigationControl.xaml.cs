@@ -42,5 +42,10 @@ namespace Panacea.Modules.AudioManager.Views
                     new CustomPopupPlacement[] { placement1 };
             return ttplaces;
         }
+
+        private void Popup_Opened(object sender, EventArgs e)
+        {
+            VolUpButton.Focus();
+        }
     }
 }

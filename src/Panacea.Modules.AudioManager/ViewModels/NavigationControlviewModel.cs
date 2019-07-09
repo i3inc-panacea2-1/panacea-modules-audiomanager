@@ -35,6 +35,12 @@ namespace Panacea.Modules.AudioManager.ViewModels
                 PopupOpen = !PopupOpen;
             },
             args => !PopupOpen);
+
+            CloseCommand = new RelayCommand(args =>
+            {
+                PopupOpen = false;
+            });
+
             VolumeDownCommand = new RelayCommand(args =>
             {
 
@@ -60,6 +66,8 @@ namespace Panacea.Modules.AudioManager.ViewModels
         }
 
         public ICommand ClickCommand { get; }
+
+        public ICommand CloseCommand { get; }
 
         public ICommand VolumeDownCommand { get; }
 

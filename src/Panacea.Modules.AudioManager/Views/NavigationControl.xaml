@@ -25,15 +25,20 @@
         Text="Volume"
         TextVisibility="Visible">
         <Popup
+            
             Name="popup"
             Width="{Binding ElementName=VolumeButton, Path=ActualWidth, Converter={StaticResource HeightConverter2}}"
             IsOpen="{Binding PopupOpen}"
             Placement="Custom"
-            StaysOpen="False">
+            StaysOpen="False"
+            IsHitTestVisible="True"
+            Focusable="True"
+            Opened="Popup_Opened">
 
             <StackPanel>
                 <TextBlock
                     Padding="5"
+                    Name="Text"
                     FontSize="{DynamicResource FontSize-Xx-Large}"
                     Foreground="White"
                     TextAlignment="Center">
@@ -44,6 +49,7 @@
                 </TextBlock>
                 <UniformGrid Columns="1">
                     <controls:ImageButton
+                        Name="VolUpButton"
                         controls:Material.Icon="volume_up"
                         Command="{Binding VolumeUpCommand}"
                         Foreground="White"
@@ -58,6 +64,11 @@
                         Text="{multilinguality:Translate 'Vol dn',
                                                          'AudioManager'}" />
                 </UniformGrid>
+                <Button Command="{Binding CloseCommand}" Foreground="White"
+                        Height="{Binding ElementName=Text, Path=ActualHeight}">
+                    <controls:MaterialIcon Icon="close"/>
+
+                </Button>
             </StackPanel>
         </Popup>
     </controls:ImageButton>
