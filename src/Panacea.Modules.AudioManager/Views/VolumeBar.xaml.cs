@@ -1,4 +1,5 @@
-﻿using Panacea.Modularity.AudioManager;
+﻿using Panacea.Controls;
+using Panacea.Modularity.AudioManager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,13 @@ namespace Panacea.Modules.AudioManager.Views
     /// <summary>
     /// Interaction logic for VolumeBar.xaml
     /// </summary>
-    public partial class VolumeBar : Window
+    public partial class VolumeBar : NonFocusableWindow
     {
         DispatcherTimer _timer;
         public VolumeBar()
         {
             InitializeComponent();
+          
         }
 
         public IAudioManager Manager { get; set; }
@@ -40,6 +42,11 @@ namespace Panacea.Modules.AudioManager.Views
             };
             _timer.Tick += _timer_Tick;
             InitializeComponent();
+            var screen = System.Windows.Forms.Screen.PrimaryScreen;
+            Width = screen.WorkingArea.Width;
+            Height = screen.WorkingArea.Height;
+            Top = screen.WorkingArea.Top;
+            Left = screen.WorkingArea.Left;
         }
 
         private void _timer_Tick(object sender, EventArgs e)
